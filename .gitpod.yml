@@ -2,6 +2,8 @@ image: nfcore/gitpod:latest
 
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
+  - name: Start 
+    command:
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
