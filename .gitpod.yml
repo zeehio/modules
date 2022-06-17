@@ -1,5 +1,7 @@
 image: nfcore/gitpod:latest
 
+before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
+
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
     - codezombiech.gitignore # Language support for .gitignore files
