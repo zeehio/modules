@@ -78,3 +78,23 @@ workflow test_hisat2_align_paired_end_no_ss {
     HISAT2_BUILD ( fasta, [[:],[]], [[:],[]])
     HISAT2_ALIGN ( input, HISAT2_BUILD.out.index, [[:],[]] )
 }
+
+workflow test_hisat2_align_single_end_unaligned {
+    input = [
+        [ id:'test', single_end:true ], // meta map
+        [
+            file(params.test_data['sarscov2']['illumina']['test_1_fastq_gz'], checkIfExists: true)
+        ]
+    ]
+    fasta = [ [id:'genome'],
+            file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+            ]
+    gtf   = [ [id:'test'],
+            file(params.test_data['sarscov2']['genome']['genome_gtf'], checkIfExists: true)
+            ]
+
+    params.save_unaligned = true
+    HISAT2_EXTRACTSPLICESITES ( gtf )
+    HISAT2_BUILD ( fasta, gtf, HISAT2_EXTRACTSPLICESITES.out.txt )
+    HISAT2_ALIGN ( input, HISAT2_BUILD.out.index, HISAT2_EXTRACTSPLICESITES.out.txt )
+}
