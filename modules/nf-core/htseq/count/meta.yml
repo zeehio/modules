@@ -32,7 +32,7 @@ input:
   - index:
       type: file
       description: Contains indexed bam file
-      pattern: "*.bai"
+      pattern: "*.{bai,crai,sai}"
   - gtf:
       type: file
       description: Contains the features in the GTF format
