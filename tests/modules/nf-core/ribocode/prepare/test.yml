@@ -1,0 +1,13 @@
+- name: ribocode prepare test_ribocode_prepare
+  command: nextflow run ./tests/modules/nf-core/ribocode/prepare -entry test_ribocode_prepare -c ./tests/config/nextflow.config
+  tags:
+    - ribocode/prepare
+    - ribocode
+  files:
+    - path: output/ribocode/annotation/transcripts.pickle
+      md5sum: 313d3e5a2f6a6d653e00863fd9e133f0
+    - path: output/ribocode/annotation/transcripts_cds.txt
+      md5sum: a79c289b6134236bc1d244eed2bb149b
+    - path: output/ribocode/annotation/transcripts_sequence.fa
+      md5sum: 54db8478e8970bc92a91cb3f248897f6
+    - path: output/ribocode/versions.yml

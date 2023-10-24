@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
+name: "ribocode_prepare"
+description: Prepare the annotation files for RiboCode ORF calling
+keywords:
+  - Ribo-Seq
+  - Ribosome Profiling
+  - ORF calling
+tools:
+  - "ribocode":
+      description: "A package for detecting the actively translated ORFs using ribosome-profiling data"
+      homepage: "https://github.com/xryanglab/RiboCode"
+      documentation: "https://github.com/xryanglab/RiboCode"
+      tool_dev_url: "https://github.com/xryanglab/RiboCode"
+      doi: "10.1093/nar/gky179"
+      licence: "['MIT']"
+
+input:
+  - gtf:
+      type: file
+      description: Sorted GTF file
+      pattern: "*.{gtf}"
+
+output:
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - annotation:
+      type: directory
+      description: path to the annotation direcotry
+      pattern: "annotation/"
+
+authors:
+  - "@JackCurragh"
