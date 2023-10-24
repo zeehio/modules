@@ -3004,6 +3004,10 @@ rhocall/annotate:
   - modules/nf-core/rhocall/annotate/**
   - tests/modules/nf-core/rhocall/annotate/**
 
+ribocode/metaplots:
+  - modules/nf-core/ribocode/metaplots/**
+  - tests/modules/nf-core/ribocode/metaplots/**
+
 ribocode/prepare:
   - modules/nf-core/ribocode/prepare/**
   - tests/modules/nf-core/ribocode/prepare/**
