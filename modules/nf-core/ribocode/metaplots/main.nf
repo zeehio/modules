@@ -2,7 +2,7 @@ process RIBOCODE_METAPLOTS {
     tag "$meta.id"
     label 'process_single'
 
-    conda "bioconda::ribocode=1.2.15 bioconda::star=2.7.10a bioconda::samtools=1.16.1 conda-forge::gawk=5.1.0"
+    conda "bioconda::ribocode=1.2.15"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/ribocode:1.2.15--pyhfa5458b_0':
         'biocontainers/ribocode:1.2.15--pyhfa5458b_0' }"
@@ -12,10 +12,10 @@ process RIBOCODE_METAPLOTS {
     path annotation
 
     output:
-    tuple val(meta), path("*.bam"), emit: bam
-    path "config.txt"             , emit: config
-    path "*.pdf"                  , emit: pdf
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*.bam")                  , emit: bam
+    tuple val(meta), path("config.txt")             , emit: config
+    tuple val(meta), path("*.pdf")                  , emit: pdf
+    path "versions.yml"                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -26,8 +26,8 @@ process RIBOCODE_METAPLOTS {
     """
     metaplots \\
         -a $annotation \\
-        -b $bam \\
-        -o ${prefix}.bam
+        -r $bam \\
+        -o report
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

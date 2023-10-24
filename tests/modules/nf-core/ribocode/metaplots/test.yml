@@ -1,13 +1,59 @@
-## TODO nf-core: Please run the following command to build this file:
-#                nf-core modules create-test-yml /metaplots
-- name: "ribocode metaplots"
+- name: ribocode metaplots test_ribocode_metaplots
   command: nextflow run ./tests/modules/nf-core/ribocode/metaplots -entry test_ribocode_metaplots -c ./tests/config/nextflow.config
   tags:
-    - "ribocode"
-    - "ribocode/metaplots"
+    - ribocode/metaplots
+    - ribocode
   files:
-    - path: "output/ribocode/test.bam"
-      md5sum: e667c7caad0bc4b7ac383fd023c654fc
-    - path: "output/ribocode/versions.yml"
-      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
-    
+    - path: output/ribocode/annotation/transcripts.pickle
+      md5sum: 313d3e5a2f6a6d653e00863fd9e133f0
+    - path: output/ribocode/annotation/transcripts_cds.txt
+      md5sum: a79c289b6134236bc1d244eed2bb149b
+    - path: output/ribocode/annotation/transcripts_sequence.fa
+      md5sum: 54db8478e8970bc92a91cb3f248897f6
+    - path: output/ribocode/versions.yml
+    - path: output/star/star/Genome
+      md5sum: a654229fbca6071dcb6b01ce7df704da
+    - path: output/star/star/Log.out
+      contains:
+        - '# TODO nf-core: file md5sum was variable, please replace this text with a string found in the file instead '
+    - path: output/star/star/SA
+      md5sum: 8c3edc46697b72c9e92440d4cf43506c
+    - path: output/star/star/SAindex
+      md5sum: d0fbf2789ee1e9f60c352ba3655d9de4
+    - path: output/star/star/chrLength.txt
+      md5sum: c81f40f27e72606d7d07097c1d56a5b5
+    - path: output/star/star/chrName.txt
+      md5sum: 5ae68a67b70976ee95342a7451cb5af1
+    - path: output/star/star/chrNameLength.txt
+      md5sum: b190587cae0531f3cf25552d8aa674db
+    - path: output/star/star/chrStart.txt
+      md5sum: 8d3291e6bcdbe9902fbd7c887494173f
+    - path: output/star/star/exonGeTrInfo.tab
+      md5sum: c2212e7b4b50170fae4090675e13b701
+    - path: output/star/star/exonInfo.tab
+      md5sum: dfc311e9f73cef5450e50d57c49aa224
+    - path: output/star/star/geneInfo.tab
+      md5sum: c512f2aea9b206d237fba1f99731948e
+    - path: output/star/star/genomeParameters.txt
+      md5sum: 6eff21f290bfdfdf54641fab94d530d2
+    - path: output/star/star/sjdbInfo.txt
+      md5sum: 5690ea9d9f09f7ff85b7fd47bd234903
+    - path: output/star/star/sjdbList.fromGTF.out.tab
+      md5sum: 8760c33e966dad0b39f440301ebbdee4
+    - path: output/star/star/sjdbList.out.tab
+      md5sum: 9e4f991abbbfeb3935a2bb21b9e258f1
+    - path: output/star/star/transcriptInfo.tab
+      md5sum: a789a53c9d27f043030d9312c5423545
+    - path: output/star/test.Aligned.out.bam
+      md5sum: 475d17f3f0be45d7e02426f098160f1f
+    - path: output/star/test.Log.final.out
+      contains:
+        - '# TODO nf-core: file md5sum was variable, please replace this text with a string found in the file instead '
+    - path: output/star/test.Log.out
+      contains:
+        - '# TODO nf-core: file md5sum was variable, please replace this text with a string found in the file instead '
+    - path: output/star/test.Log.progress.out
+      md5sum: b2bd061d6cbaaf3d6d3b1fed547f69b8
+    - path: output/star/test.SJ.out.tab
+      md5sum: 75a516ab950fb958f40b29996474949c
+    - path: output/star/versions.yml

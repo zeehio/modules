@@ -33,5 +33,6 @@ workflow test_ribocode_metaplots {
 
     STAR_GENOMEGENERATE ( fasta, gtf )
     STAR_ALIGN ( input, STAR_GENOMEGENERATE.out.index, gtf, star_ignore_sjdbgtf, seq_platform, seq_center )
-    // RIBOCODE_PREPARE( fasta[1], gtf[1] )
+    RIBOCODE_PREPARE( fasta[1], gtf[1] )
+    RIBOCODE_METAPLOTS( STAR_ALIGN.out.bam_transcript, RIBOCODE_PREPARE.out.annotation )
 }
