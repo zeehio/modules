@@ -15,7 +15,6 @@ tools:
       doi: "10.1093/nar/gky179"
       licence: "['MIT']"
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
   - meta:
@@ -24,30 +23,37 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
   
-  ## TODO nf-core: Delete / customise this example input
   - bam:
       type: file
       description: Sorted BAM/CRAM/SAM file
       pattern: "*.{bam,cram,sam}"
 
-## TODO nf-core: Add a description of all of the variables used as output
+  - annotation:
+      type: directory
+      description: Directory containing annotation files
+      pattern: "annotation"
+
 output:
-  #Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
-  
+
+  - config:
+      type: file
+      description: RiboCode configuration file
+      pattern: "config.txt"
+
+  - pdf:
+      type: file
+      description: PDF file containing metaplots
+      pattern: "*.pdf"
+
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
 
 authors:
   - "@JackCurragh"

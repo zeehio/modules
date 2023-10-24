@@ -31,10 +31,10 @@ process RIBOCODE_PREPARE {
         -f $fasta \\
         -o annotation
 
-        cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            RiboCode: \$(RiboCode --version)
-        END_VERSIONS
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        RiboCode: \$(RiboCode --version)
+    END_VERSIONS
     """
 
     stub:
@@ -47,10 +47,9 @@ process RIBOCODE_PREPARE {
     touch annotaiton/transcripts_sequence.fa
     touch annotaiton/transcripts.pickle
 
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        RiboCode: \$(RiboCode --version)
+        RiboCode: \$(RiboCode --version 2>&1)
     END_VERSIONS
     """
 }
