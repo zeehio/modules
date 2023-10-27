@@ -2966,9 +2966,13 @@ qualimap/rnaseq:
   - modules/nf-core/qualimap/rnaseq/**
   - tests/modules/nf-core/qualimap/rnaseq/**
 
-quast:
-  - modules/nf-core/quast/**
-  - tests/modules/nf-core/quast/**
+quast/quast:
+  - modules/nf-core/quast/quast/**
+  - tests/modules/nf-core/quast/quast/**
+
+quast/metaquast:
+  - modules/nf-core/quast/metaquast/**
+  - tests/modules/nf-core/quast/metaquast/**
 
 quilt/quilt:
   - modules/nf-core/quilt/quilt/**

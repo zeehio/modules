@@ -2,10 +2,10 @@
 
 nextflow.enable.dsl = 2
 
-include { QUAST as QUAST_REF         }   from '../../../../modules/nf-core/quast/main.nf'
-include { QUAST as QUAST_NOREF_NOGFF }   from '../../../../modules/nf-core/quast/main.nf'
-include { QUAST as QUAST_NOGFF       }   from '../../../../modules/nf-core/quast/main.nf'
-include { QUAST as QUAST_NOREF       }   from '../../../../modules/nf-core/quast/main.nf'
+include { QUAST as QUAST_REF         }   from '../../../../modules/nf-core/quast/quast/main.nf'
+include { QUAST as QUAST_NOREF_NOGFF }   from '../../../../modules/nf-core/quast/quast/main.nf'
+include { QUAST as QUAST_NOGFF       }   from '../../../../modules/nf-core/quast/quast/main.nf'
+include { QUAST as QUAST_NOREF       }   from '../../../../modules/nf-core/quast/quast/main.nf'
 
 workflow test_quast_ref {
     consensus = [[ id:'test', single_end:false ], file(params.test_data['sarscov2']['genome']['transcriptome_fasta'], checkIfExists: true)]

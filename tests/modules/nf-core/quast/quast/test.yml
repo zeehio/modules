@@ -1,5 +1,5 @@
 - name: quast test_quast_ref
-  command: nextflow run ./tests/modules/nf-core/quast -entry test_quast_ref -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
+  command: nextflow run ./tests/modules/nf-core/quast/quast -entry test_quast_ref -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
   tags:
     - quast
   files:
@@ -88,7 +88,7 @@
     - path: output/quast/versions.yml
 
 - name: quast test_quast_noref_nogff
-  command: nextflow run ./tests/modules/nf-core/quast -entry test_quast_noref_nogff -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
+  command: nextflow run ./tests/modules/nf-core/quast/quast -entry test_quast_noref_nogff -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
   tags:
     - quast
   files:
@@ -118,7 +118,7 @@
     - path: output/quast/versions.yml
 
 - name: quast test_quast_nogff
-  command: nextflow run ./tests/modules/nf-core/quast -entry test_quast_nogff -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
+  command: nextflow run ./tests/modules/nf-core/quast/quast -entry test_quast_nogff -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
   tags:
     - quast
   files:
@@ -203,7 +203,7 @@
     - path: output/quast/versions.yml
 
 - name: quast test_quast_noref
-  command: nextflow run ./tests/modules/nf-core/quast -entry test_quast_noref -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
+  command: nextflow run ./tests/modules/nf-core/quast/quast -entry test_quast_noref -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/quast/nextflow.config
   tags:
     - quast
   files:
