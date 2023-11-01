@@ -331,19 +331,6 @@ bcftools/view:
 - modules/nf-core/bcftools/view/**
 - tests/modules/nf-core/bcftools/view/**
 
-<<<<<<< HEAD
-bcl2fastq:
-- modules/nf-core/bcl2fastq/**
-- modules/nf-core/untar/**
-- tests/modules/nf-core/bcl2fastq/**
-
-bclconvert:
-- modules/nf-core/bclconvert/**
-- modules/nf-core/untar/**
-- tests/modules/nf-core/bclconvert/**
-
-=======
->>>>>>> 2a58df749793bec72bc524398e868bd9a86726d2
 beagle5/beagle:
 - modules/nf-core/beagle5/beagle/**
 - tests/modules/nf-core/beagle5/beagle/**
@@ -2959,13 +2946,6 @@ purgedups/splitfa:
 - modules/nf-core/purgedups/splitfa/**
 - tests/modules/nf-core/purgedups/splitfa/**
 
-<<<<<<< HEAD
-pycoqc:
-- modules/nf-core/pycoqc/**
-- tests/modules/nf-core/pycoqc/**
-
-=======
->>>>>>> 2a58df749793bec72bc524398e868bd9a86726d2
 pydamage/analyze:
 - modules/nf-core/pydamage/analyze/**
 - tests/modules/nf-core/pydamage/analyze/**
@@ -3094,13 +3074,6 @@ rtgtools/pedfilter:
 - modules/nf-core/rtgtools/pedfilter/**
 - tests/modules/nf-core/rtgtools/pedfilter/**
 
-<<<<<<< HEAD
-rtgtools/rocplot:
-- modules/nf-core/rtgtools/rocplot/**
-- tests/modules/nf-core/rtgtools/rocplot/**
-
-=======
->>>>>>> 2a58df749793bec72bc524398e868bd9a86726d2
 rtgtools/vcfeval:
 - modules/nf-core/rtgtools/vcfeval/**
 - tests/modules/nf-core/rtgtools/vcfeval/**
