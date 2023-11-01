@@ -46,15 +46,14 @@
     - path: output/star/star/transcriptInfo.tab
       md5sum: a789a53c9d27f043030d9312c5423545
     - path: output/star/test.Aligned.sortedByCoord.out.bam
-      md5sum: a3c431ba0319382bf7285312dca11dbe
+      md5sum: 621a416948ac98f0e529c730a4dccab5
     - path: output/star/test.Aligned.toTranscriptome.out.bam
-      md5sum: 338861fb841065025134975794417550
+      md5sum: ee2e62ec4e887c7fbd32a6e90de253c2
     - path: output/star/test.Log.final.out
     - path: output/star/test.Log.out
     - path: output/star/test.Log.progress.out
       md5sum: b2bd061d6cbaaf3d6d3b1fed547f69b8
     - path: output/star/test.ReadsPerGene.out.tab
-      md5sum: eadb4aef830164f27bb73964bbfd5cce
+      md5sum: 361fdcde3d06b01d1d0be8853307c5ab
     - path: output/star/test.SJ.out.tab
-      md5sum: b56e262ef1b09f952dbd5b990c368eea
     - path: output/star/versions.yml

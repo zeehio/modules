@@ -7,7 +7,7 @@ process MITOHIFI_MITOHIFI {
     container 'ghcr.io/marcelauliano/mitohifi:master'
 
     input:
-    tuple val(meta), path(reads), path(contigs)
+    tuple val(meta), path(input)
     path ref_fa
     path ref_gb
     val mito_code
@@ -37,15 +37,21 @@ process MITOHIFI_MITOHIFI {
     script:
     // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
-        exit 1, "MitoHiFi module does not support Conda. Please use Docker / Singularity instead."
+        error "MitoHiFi module does not support Conda. Please use Docker / Singularity instead."
     }
 
     def args = task.ext.args ?: ''
-    def run_type = reads ? "-r ${reads}" :
-                    contigs ? "-c ${contigs}" :
-                    exit("Reads or contigs must be specified")
+    def args2 = task.ext.args2 ?: ''
+    if (! ["-c", "-r"].contains(args2)) {
+        error "-r for reads or -c for contigs must be specified"
+    }
+    def script_input = "${args2} ${input}"
     """
-    mitohifi.py ${run_type} -f ${ref_fa} -g ${ref_gb} -o ${mito_code} -t $task.cpus ${args}
+    mitohifi.py ${script_input} \\
+        -f ${ref_fa} \\
+        -g ${ref_gb} \\
+        -o ${mito_code} \\
+        -t $task.cpus ${args}
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         mitohifi: \$( mitohifi.py --version 2>&1 | head -n1 | sed 's/^.*MitoHiFi //; s/ .*\$//' )
