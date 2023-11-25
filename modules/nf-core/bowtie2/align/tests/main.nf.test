@@ -1,3 +1,6 @@
+@Grab(group='com.github.samtools', module='htsjdk', version='4.0.2')
+import htsjdk.samtools.SamReaderFactory
+
 nextflow_process {
 
     name "Test Process BOWTIE2_ALIGN"
@@ -39,10 +42,16 @@ nextflow_process {
         }
 
         then {
+            // Skip the header
+            // Return everything in the iterator
+            reads = SamReaderFactory.makeDefault().open(file(process.out.aligned[0][1])).forEach(read -> {
+                return read
+            })
+
             assertAll (
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.aligned[0][1]).name,
+                    reads,
                     process.out.log,
                     process.out.fastq,
                     process.out.versions
