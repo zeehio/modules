@@ -1,0 +1,2 @@
+subworkflows/fasta_index_dna:
+  - subworkflows/nf-core/fasta_index_dna/**
