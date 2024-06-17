@@ -52,9 +52,9 @@ process MULTIQC {
     """
 }
 
-def mod_container = switch() {
-    case {workflow.containerEngine == 'singularity' && task.arch == 'linux/arm64'} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--af20ae77441fdc43'
-    case {"workflow.containerEngine == 'singularity'"} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--ac0a91c1ae1c160c'
-    case {task.arch == 'linux/arm64'} -> 'community.wave.seqera.io/library/multiqc:1.22.1--22ddc3b95632778f'
+def mod_container = switch([workflow.containerEngine, task.arch]) {
+    case {it[0] == 'singularity' && it[1] == 'linux/arm64'} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--af20ae77441fdc43'
+    case {it[0] == 'singularity'} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--ac0a91c1ae1c160c'
+    case {it[1] == 'linux/arm64'} -> 'community.wave.seqera.io/library/multiqc:1.22.1--22ddc3b95632778f'
     case default -> 'community.wave.seqera.io/library/multiqc:1.22.1--4886de6095538010'
 }
