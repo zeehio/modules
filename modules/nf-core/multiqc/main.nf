@@ -2,9 +2,7 @@ process MULTIQC {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/multiqc:1.22.2--pyhdfd78af_0' :
-        'biocontainers/multiqc:1.22.2--pyhdfd78af_0' }"
+    container mod_container
 
     input:
     path  multiqc_files, stageAs: "?/*"
@@ -52,4 +50,20 @@ process MULTIQC {
         multiqc: \$( multiqc --version | sed -e "s/multiqc, version //g" )
     END_VERSIONS
     """
+}
+
+def mod_container = ''
+switch (x) {
+    case {workflow.containerEngine == 'singularity' && task.arch == 'linux/arm64'}:
+        mod_container = 'oras://community.wave.seqera.io/library/multiqc:1.22.1--af20ae77441fdc43'
+
+    case {"workflow.containerEngine == 'singularity'"}:
+        mod_container = 'oras://community.wave.seqera.io/library/multiqc:1.22.1--ac0a91c1ae1c160c'
+
+    case {task.arch == 'linux/arm64'}:
+        mod_container = 'community.wave.seqera.io/library/multiqc:1.22.1--22ddc3b95632778f'
+
+    case default:
+        mod_container = 'community.wave.seqera.io/library/multiqc:1.22.1--4886de6095538010'
+
 }
