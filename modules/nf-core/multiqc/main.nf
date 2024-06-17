@@ -1,6 +1,8 @@
 def arch = "linux/x86_64"
 def mod_container = switch([workflow.containerEngine, arch]) {
+    // renovate: datasource=singularity depName=community.wave.seqera.io/library/multiqc
     case {it[0] == 'singularity' && it[1] == 'linux/arm64'} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--af20ae77441fdc43'
+    // renovate: datasource=singularity depName=community.wave.seqera.io/library/multiqc
     case {it[0] == 'singularity'} -> 'oras://community.wave.seqera.io/library/multiqc:1.22.1--ac0a91c1ae1c160c'
     case {it[1] == 'linux/arm64'} -> 'community.wave.seqera.io/library/multiqc:1.22.1--22ddc3b95632778f'
     default -> 'community.wave.seqera.io/library/multiqc:1.22.1--4886de6095538010'
