@@ -1,0 +1,8 @@
+---
+name: "sentieon_qualcal"
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - "bioconda::sentieon=202308.03"
