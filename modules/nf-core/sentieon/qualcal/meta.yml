@@ -11,7 +11,7 @@ tools:
       description: "Sentieon® Genomics software is a set of software tools that perform analysis of genomic data obtained from DNA sequencing"
       homepage: "https://www.sentieon.com/"
       documentation: "https://support.sentieon.com/manual/"
-      doi: "https://doi.org/10.1101/115717"
+      doi: "10.1101/115717"
       licence: ["Commercial license, including single machine and cluster licenses"]
 
 input:
