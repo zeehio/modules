@@ -1,0 +1,63 @@
+---
+name: "sentieon_qualcal"
+description: Calculates and applies the recalibration table for BQSR using Sentieon's QualCal algorithm
+keywords:
+  - qualcal
+  - bqsr
+  - sentieon
+  - recalibration
+tools:
+  - "sentieon":
+      description: "Sentieon® Genomics software is a set of software tools that perform analysis of genomic data obtained from DNA sequencing"
+      homepage: "https://www.sentieon.com/"
+      documentation: "https://support.sentieon.com/manual/"
+      doi: "https://doi.org/10.1101/115717"
+      licence: ["Commercial license, including single machine and cluster licenses"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - meta_ref:
+      type: map
+      description: |
+        Groovy Map containing reference information
+        e.g. `[ id:'test_reference' ]`
+  - bam:
+      type: file
+      description: Deduped BAM file
+      pattern: "*.bam"
+  - bai:
+      type: file
+      description: Index of the deduped BAM file
+      pattern: "*.bai"
+  - fasta:
+      type: file
+      description: FASTA reference file
+      pattern: "*.{fa,fasta}"
+  - fai:
+      type: file
+      description: Index of the FASTA reference file
+      pattern: "*.fai"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - recal_data:
+      type: file
+      description: Recalibration table
+      pattern: "*.recal_data.table"
+
+authors:
+  - "@ivadym"
+maintainers:
+  - "@ivadym"

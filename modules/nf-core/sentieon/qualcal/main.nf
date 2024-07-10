@@ -1,9 +1,9 @@
 process SENTIEON_QUALCAL {
     tag "$meta.id"
-    label 'process_high'
-    label 'sentieon'
+    label "process_high"
+    label "sentieon"
 
-    secret 'SENTIEON_LICENSE_BASE64'
+    secret "SENTIEON_LICENSE_BASE64"
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -12,7 +12,7 @@ process SENTIEON_QUALCAL {
 
     input:
     tuple val(meta), path(bam), path(bai)
-    tuple val(meta2), path(fasta), path(fai)
+    tuple val(meta_ref), path(fasta), path(fai)
 
     output:
     tuple val(meta), path("*.recal_data.table") , emit: recal_data
@@ -25,16 +25,16 @@ process SENTIEON_QUALCAL {
     // The following code sets LD_LIBRARY_PATH in the script-section when the module is run by Singularity.
     // That turned out to be one way of overcoming the following issue with the Singularity-Sentieon-containers from galaxy, Sentieon (LD_LIBRARY_PATH) and the way Nextflow runs Singularity-containers.
     // The galaxy container uses a runscript which is responsible for setting LD_PRELOAD properly. Nextflow executes singularity containers using `singularity exec`, which avoids the run script, leading to the LD_LIBRARY_PATH/libstdc++.so.6 error.
-    if (workflow.containerEngine in ['singularity','apptainer']) {
-        fix_ld_library_path = 'LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH;export LD_LIBRARY_PATH'
+    if (workflow.containerEngine in ["singularity", "apptainer"]) {
+        fix_ld_library_path = "LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH;export LD_LIBRARY_PATH"
     } else {
-        fix_ld_library_path = ''
+        fix_ld_library_path = ""
     }
 
-    def args = task.ext.args ?: ''
+    def args = task.ext.args ?: ""
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def sentieon_auth_mech_base64 = task.ext.sentieon_auth_mech_base64 ?: ''
-    def sentieon_auth_data_base64 = task.ext.sentieon_auth_data_base64 ?: ''
+    def sentieon_auth_mech_base64 = task.ext.sentieon_auth_mech_base64 ?: ""
+    def sentieon_auth_data_base64 = task.ext.sentieon_auth_data_base64 ?: ""
 
     """
     if [ "\${#SENTIEON_LICENSE_BASE64}" -lt "1500" ]; then  # If the string SENTIEON_LICENSE_BASE64 is short, then it is an encrypted url.
@@ -73,13 +73,13 @@ process SENTIEON_QUALCAL {
     // The following code sets LD_LIBRARY_PATH in the script-section when the module is run by Singularity.
     // That turned out to be one way of overcoming the following issue with the Singularity-Sentieon-containers from galaxy, Sentieon (LD_LIBRARY_PATH) and the way Nextflow runs Singularity-containers.
     // The galaxy container uses a runscript which is responsible for setting LD_PRELOAD properly. Nextflow executes singularity containers using `singularity exec`, which avoids the run script, leading to the LD_LIBRARY_PATH/libstdc++.so.6 error.
-    if (workflow.containerEngine in ['singularity','apptainer']) {
-        fix_ld_library_path = 'LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH;export LD_LIBRARY_PATH'
+    if (workflow.containerEngine in ["singularity", "apptainer"]) {
+        fix_ld_library_path = "LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH;export LD_LIBRARY_PATH"
     } else {
-        fix_ld_library_path = ''
+        fix_ld_library_path = ""
     }
 
-    def args = task.ext.args ?: ''
+    def args = task.ext.args ?: ""
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
