@@ -20,7 +20,6 @@ nextflow_process {
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)),
                         tuple([ id:'test_bai' ],
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true))
-
                     ])
                     input[1] =  Channel.fromList([
                         tuple([ id:'test_fasta' ],
