@@ -9,7 +9,7 @@
 # To update a single package to the latest version compatible with the version constraints in the source:
 #     conda-lock lock  --lockfile conda-lock.yml --update PACKAGE
 # To re-solve the entire environment, e.g. after changing a version constraint in the source file:
-#     conda-lock -f modules/nf-core/bowtie/build/environment.yml --lockfile conda-lock.yml
+#     conda-lock -f modules/nf-core/bowtie/align/environment.yml --lockfile conda-lock.yml
 version: 1
 metadata:
   content_hash:
@@ -22,7 +22,7 @@ metadata:
   platforms:
   - linux-64
   sources:
-  - modules/nf-core/bowtie/build/environment.yml
+  - modules/nf-core/bowtie/align/environment.yml
 package:
 - name: _libgcc_mutex
   version: '0.1'
