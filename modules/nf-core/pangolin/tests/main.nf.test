@@ -8,6 +8,21 @@ nextflow_process {
     tag "modules_nfcore"
     tag "pangolin"
 
+
+    setup {
+        run("UNTAR") {
+            script "../../untar/main.nf"
+            process {
+            """
+            input[0] = [
+                [ ],
+                file('/workspace/modules/pangolin-data.v1.29.tar.gz', checkIfExists: true)
+            ]
+            """
+            }
+        }
+    }
+
     test("sarscov2 genome [fasta]") {
 
         when {
@@ -17,6 +32,7 @@ nextflow_process {
                             [ id:'test' ], // meta map
                             [ file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true) ]
                 ]
+                input[1] = UNTAR.out.untar.map{ it[1] }
                 """
             }
         }
@@ -41,6 +57,7 @@ nextflow_process {
                             [ id:'test' ], // meta map
                             [ file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true) ]
                 ]
+                input[1] = UNTAR.out.untar.map{ it[1] }
                 """
             }
         }

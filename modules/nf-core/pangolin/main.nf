@@ -9,6 +9,7 @@ process PANGOLIN {
 
     input:
     tuple val(meta), path(fasta)
+    path(datadir)
 
     output:
     tuple val(meta), path('*.csv'), emit: report
@@ -20,9 +21,11 @@ process PANGOLIN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def database = datadir ? "--datadir ${datadir}" : ""
     """
     pangolin \\
-        $fasta\\
+        $fasta \\
+        $database \\
         --outfile ${prefix}.pangolin.csv \\
         --threads $task.cpus \\
         $args
