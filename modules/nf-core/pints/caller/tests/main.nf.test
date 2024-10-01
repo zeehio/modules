@@ -10,7 +10,7 @@ nextflow_process {
     tag "pints"
     tag "pints/caller"
 
-    test("groHMM data - [bam, bam], fasta") {
+    test("groHMM data - multiple bams") {
 
         when {
             process {
@@ -24,6 +24,7 @@ nextflow_process {
                     [],
                 ]
                 input[1] = "GROseq"
+                input[2] = "chr7"
                 """
             }
         }
@@ -43,7 +44,7 @@ nextflow_process {
 
     }
 
-    test("groHMM data - [bam], fasta") {
+    test("groHMM data - single bam") {
 
         when {
             process {
@@ -54,6 +55,7 @@ nextflow_process {
                     [],
                 ]
                 input[1] = "GROseq"
+                input[2] = "chr7"
                 """
             }
         }
@@ -96,6 +98,29 @@ nextflow_process {
         }
     }
 
+    test("Fails without a chr_name") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data['sarscov2']['illumina']['test_paired_end_sorted_bam'], checkIfExists: true)
+                    [],
+                ]
+                input[1] = "GROseq"
+                input[2] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                // FIXME Ideally this would work in a perfect world, but I think using each with it is more important and useful.
+                { assert process.failed },
+            )
+        }
+    }
     // TODO Test single bigwig input
     // TODO Test multiple bigwig input
 }
