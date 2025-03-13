@@ -1,0 +1,159 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "fgbio_reviewconsensusvariants"
+description: |
+  Extracts data to make reviewing of variant calls from consensus reads easier.
+  Creates a list of variant sites from the input VCF (SNPs only) or IntervalList then extracts
+  all the consensus reads that do not contain a reference allele at the the variant sites, and
+  all raw reads that contributed to those consensus reads. This will include consensus reads
+  that carry the alternate allele, a third allele, a no-call or a spanning deletion at the variant site.
+keywords:
+  - sort
+  - example
+  - genomics
+tools:
+  - fgbio:
+      description: A set of tools for working with genomic and high throughput sequencing
+        data, including UMIs
+      homepage: http://fulcrumgenomics.github.io/fgbio/
+      documentation: http://fulcrumgenomics.github.io/fgbio/tools/latest/
+      tool_dev_url: https://github.com/fulcrumgenomics/fgbio
+      licence: ["MIT"]
+      identifier: biotools:fgbio
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+
+    - consensus_bam:
+        type: file
+        description: Position sorted consensus bam file
+        pattern: "*.{bam,cram,sam}"
+        ontologies:
+          - edam: "http://edamontology.org/format_2572" # BAM
+
+    - consensus_bam_index:
+        type: file
+        description: index for the consensus bam
+        pattern: "*.bai"
+        ontologies:
+          - edam: "http://edamontology.org/format_3327"
+
+    - grouped_bam:
+        type: file
+        description: Position sorted grouped bam file
+        pattern: "*.bam"
+        ontologies:
+          - edam: "http://edamontology.org/format_2572" # BAM
+
+    - grouped_bam_index:
+        type: file
+        description: index for the grouped bam
+        pattern: "*.bai"
+        ontologies:
+          - edam: "http://edamontology.org/format_3327"
+
+    - position_list:
+        type: file
+        description: Input VCF or IntervalList of variant locations.
+
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+
+    - fasta:
+        type: file
+        description: Input genome fasta file
+        ontologies:
+          - edam: "http://edamontology.org/data_2044" # Sequence
+          - edam: "http://edamontology.org/format_1929" # FASTA
+
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+
+    - fasta_fai:
+        type: file
+        description: The index of the FASTA reference.
+        pattern: "*.fai"
+
+  - - meta4:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+
+    - dict:
+        type: file
+        description: Dictionary for the FASTA reference
+        pattern: "*.dict"
+
+output:
+  - consensus_bam:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.consensus.bam":
+          type: file
+          description: Subset consensus bam containing the relevant reads
+          pattern: "*.bam"
+          ontologies:
+            - edam: "http://edamontology.org/format_2572" # BAM
+      - "*.consensus.bai":
+          type: file
+          description: Index for the grouped bam file
+          pattern: "*.bai"
+          ontologies:
+          - edam: "http://edamontology.org/format_3327"
+
+  - grouped_bam:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.grouped.bam":
+          type: file
+          description: Subset grouped bam containing the relevant reads
+          pattern: "*.bam"
+          ontologies:
+            - edam: "http://edamontology.org/format_2572" # BAM
+      - "*.grouped.bai":
+          type: file
+          description: Index for the grouped bam file
+          pattern: "*.bai"
+          ontologies:
+          - edam: "http://edamontology.org/format_3327"
+
+  - summary:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.txt":
+          type: file
+          description: |
+            Summary review file containing details on each variant position along with detailed
+            information on each consensus read that supports the variant.
+          pattern: "*.txt"
+
+  - versions:
+      - "versions.yml":
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+
+authors:
+  - "@sppearce"
+maintainers:
+  - "@sppearce"
